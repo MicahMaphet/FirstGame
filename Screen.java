@@ -15,7 +15,7 @@ public class Screen extends JPanel implements ActionListener, KeyListener {
       setPreferredSize(new Dimension(Screensize, Screensize));
       setBackground(new Color(232, 232, 232));
       littguy = new Littguy();
-      obstacles = drawObstacles(200, 300, 200, 200);
+      obstacles = drawObstacles();
       timer = new Timer(DELAY, this);
       timer.start();
   }
@@ -34,27 +34,27 @@ public class Screen extends JPanel implements ActionListener, KeyListener {
 
       Toolkit.getDefaultToolkit().sync();
   }
+  public ArrayList<Obstacle> drawObstacles() {
+    ArrayList<Obstacle> ObstacleList = new ArrayList<>();
+      ObstacleList.add(new Obstacle(0, 100));
+      ObstacleList.add(new Obstacle(50, 100));
+      ObstacleList.add(new Obstacle(100, 100));
+      ObstacleList.add(new Obstacle(150, 100));
+      ObstacleList.add(new Obstacle(200, 100));
+      ObstacleList.add(new Obstacle(250, 100));
+      ObstacleList.add(new Obstacle(300, 100));
+      // another wall
+      ObstacleList.add(new Obstacle(400, 0));
+      ObstacleList.add(new Obstacle(400, 50));
+      ObstacleList.add(new Obstacle(400, 100));
+      ObstacleList.add(new Obstacle(400, 150));
 
-  public void drawObstacles(int x1, int x2, int y1, int y2) {
-    if (x1 < x2){
-    for (int i = 0; i < Math.abs(x1 - x2) / 50; i++) {
-      ManageOL(50 * i + x1, y1);
-    }
-  
-    } else if (x1 > x2) {
-      for (int i = 0; i < Math.abs(x2 - x1) / 50; i++) {
-        ManageOL(50 * i + x1, y1); 
-    }
+      return ObstacleList;
   }
-}
 
- public ArrayList<Obstacle> ManageOL(int x_, int y_) {
-  ArrayList<Obstacle> ObstacleList = new ArrayList<>();
-  ObstacleList.add(new Obstacle(x_, y_));
-  return ObstacleList;
- }
   @Override
   public void keyTyped(KeyEvent e) {
+
   }
 
   @Override
