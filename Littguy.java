@@ -86,8 +86,11 @@ public class Littguy {
    }
 //the code within tick is constantly being activitated (or should be)
     public void tick() {
+
+// this is where Littguy tells java to move, the rest is just setting values
         pos.translate(LitVolHor, LitVolVer);  
-        final int LGSpeedLimit = 20;
+
+        final int LGSpeedLimit = 10; // If you change this value the collision will break, unless you change the collsion a bit
 //limit speed
         if (LitVolHor < LGSpeedLimit * -1) {
             LitVolHor = LGSpeedLimit * -1;
@@ -123,8 +126,65 @@ public class Littguy {
         } else if (pos.y > 950) {
             pos.y = 950;
          }
-//collision on obstacles
+// background collision, yes I am individualy setting the values of where Littguy cannot go. It's my first game though
+        if (pos.x > 350) { //in this collision the x courdinate is 400
+            if (pos.x < 450) {
+                if (pos.y < 190)
+                  if (LitVolHor > 0) {
+                     pos.x = 350;
+                } else if (LitVolHor < 0) {
+                    if (pos.x < 450) {
+                    pos.x = 450;
+                    }
+                } 
+            }
+        }
+
+        if (pos.x  > 350) { //this collision is a block at 400 150, I have Littguy saying that it is 350, 450, 200 to account for overlapping with the block
+            if (pos.x < 450) {
+                if (pos.y < 200) {
+                    if (LitVolVer < 0) {
+                        if (pos.y > 190) {
+                    pos.y = 200;
+                        }
+                    }
+                }
+            }
+        }
+ //this collision is a block at 0, 300, 100, It is so he can not go through the first wall going up
+        if (pos.x >= 0 ) { //from the left side of the wall
+            if (pos.x < 350) {//to the right side of the wall
+                if (pos.y > 138)
+                if (pos.y < 150) {
+                    if (LitVolVer < 0) {
+                    pos.y = 150;
+                }
+            }
+        }
+//this is the collision that stops Littguy from going throught the first wall downards
+        if (pos.x >= 0 ) { 
+            if (pos.x < 350) {
+                if (pos.y > 50) {
+                if (pos.y < 65) {
+                    if (LitVolVer > 0) {
+                    pos.y = 50;
+                    }
+                }
+            }
+        }
     }
+        if (pos.x > 338) { //in this collision the x courdinate is 300
+            if (pos.x < 350) {
+                if (pos.y < 150)
+                  if (pos.y > 50) {
+                  if (LitVolHor < 0) {
+                     pos.x = 350; 
+                   }
+                } 
+            }
+        }
+    }
+}
 
 
     public Point getPos() {
@@ -132,3 +192,4 @@ public class Littguy {
     }
 
  }
+//translate
